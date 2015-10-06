@@ -17,35 +17,39 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("MBC Planning Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               @* @Html.ActionLink("MBC Planning Application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) *@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Main Menu", "Index", "Home")</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">General <span class="caret"</span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="#">MBC Project</a></li>
                             <li>@Html.ActionLink("Drawing Register", "DrawingRegister", "DrawingRegister")</li>
-                            <li><a href="#">Information Required</a></li>
-                            <li><a href="#">Material Procurement Scheme</a></li>
+                            <li><a href="#">Plant Hire</a></li>
+                            <li><a href="#">Anything Else</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vendors/Contacts <span class="caret"</span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">A</a></li>
-                            <li><a href="#">B</a></li>
-                            <li><a href="#">C</a></li>
+                            <li>@Html.ActionLink("List Vendors HQs", "Index", "vendorHQTables")</li>
+                            <li>@Html.ActionLink("List All Vendors", "index", "vendorLocationDetails")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Create New HQ", "Create", "vendorHQTables")</li>
+                            <li>@Html.ActionLink("Create New Vendor", "Create", "vendorLocationDetails")</li>
+                            <!-- <li><a href="#">C</a></li> -->
                         </ul>
                     </li>
-                    <li class="dropdown">
+                   <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contracts <span class="caret"</span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">D</a></li>
                             <li><a href="#">E</a></li>
                             <li><a href="#">F</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("About", "About", "Home")</li>

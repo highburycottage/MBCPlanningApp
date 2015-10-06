@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +60,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,8 +132,55 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DrawingRegisterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\vendorHQTablesController.cs" />
+    <Compile Include="Controllers\vendorLocationDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\constructionStaff.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\drawingRegister.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\itemContent.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MBCPlanningModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MBCPlanningModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MBCPlanningModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MBCPlanningModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MBCPlanningModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plantHireOrder.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\project.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\projectRequisition.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\requisition.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vendorHQTable.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vendorLocationDetail.cs">
+      <DependentUpon>MBCPlanningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -135,8 +192,25 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Helpers\Images\Marshall Logo smaller.jpg" />
+    <Content Include="Models\MBCPlanningModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MBCPlanningModel.edmx</DependentUpon>
+      <LastGenOutput>MBCPlanningModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MBCPlanningModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MBCPlanningModel.edmx</DependentUpon>
+      <LastGenOutput>MBCPlanningModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\MBCPlanningModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MBCPlanningModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MBCPlanningModel.edmx.diagram">
+      <DependentUpon>MBCPlanningModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -164,10 +238,19 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\DrawingRegister\DrawingRegister.cshtml" />
+    <Content Include="Views\vendorHQTables\Create.cshtml" />
+    <Content Include="Views\vendorHQTables\Delete.cshtml" />
+    <Content Include="Views\vendorHQTables\Details.cshtml" />
+    <Content Include="Views\vendorHQTables\Edit.cshtml" />
+    <Content Include="Views\vendorHQTables\Index.cshtml" />
+    <Content Include="Views\vendorLocationDetails\Create.cshtml" />
+    <Content Include="Views\vendorLocationDetails\Delete.cshtml" />
+    <Content Include="Views\vendorLocationDetails\Details.cshtml" />
+    <Content Include="Views\vendorLocationDetails\Edit.cshtml" />
+    <Content Include="Views\vendorLocationDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +260,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

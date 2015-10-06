@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PlanningApp.Models.vendorLocationDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Vendor Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.Label("Name")
+            </th>
+            <th>
+                @Html.Label("Address")
+            </th>
+            <th>
+                @Html.Label("Address cont")
+            </th>
+            <th>
+                @Html.Label("Town/City")
+            </th>
+            <th>
+                @Html.Label("County")
+            </th>
+            <th>
+                @Html.Label("PostCode")
+            </th>
+            <th>
+                @Html.Label("Phone Number")
+            </th>
+            <th>
+                @Html.Label("Contact")
+            </th>
+            <th>
+                @Html.Label("Email Address")
+            </th>
+            <th>
+                @Html.Label("Head Office")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorAddress2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorCounty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorPostCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorContact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vendorHQTable.vendorLocationID)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) 
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

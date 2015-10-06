@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf49891c94bb462db511cb3ca7d73b45" Name="Diagram1">
+        <EntityTypeShape EntityType="MBCPlanningModel.constructionStaff" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.drawingRegister" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.itemContent" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.plantHireOrder" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.project" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.projectRequisition" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.requisition" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.sysdiagram" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.vendorHQTable" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MBCPlanningModel.vendorLocationDetail" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="MBCPlanningModel.projectRequisitions_constructionStaffprojectRequisitions" ManuallyRouted="false" />
+        <AssociationConnector Association="MBCPlanningModel.requisition_itemContentsrequisition" ManuallyRouted="false" />
+        <AssociationConnector Association="MBCPlanningModel.projectRequisitions_projectprojectRequisitions" ManuallyRouted="false" />
+        <AssociationConnector Association="MBCPlanningModel.projectRequisitions_requisitionprojectRequisitions" ManuallyRouted="false" />
+        <AssociationConnector Association="MBCPlanningModel.vendorLocationDetails_vendorHQTablevendorLocationDetails" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

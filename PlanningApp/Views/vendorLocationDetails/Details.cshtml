@@ -7,11 +7,11 @@
 <h2>Details</h2>
 
 <div>
-    <h4>vendorLocationDetail</h4>
+    <h4>Vendor Location Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.vendorName)
+            @Html.Label("Vendor")
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorAddress)
+            @Html.Label("Address")
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorAddress2)
+            @Html.Label("Address cont")
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorCity)
+            @Html.Label("Town/City")
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorCounty)
+            @Html.Label("County")
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorPostCode)
+            @Html.Label("Post Code")
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorPhoneNumber)
+            @Html.Label("Phone Number")
         </dt>
 
         <dd>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorContact)
+            @Html.Label("Contact")
         </dt>
 
         <dd>
@@ -75,24 +75,25 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.vendorEmail)
+            @Html.Label("Email Address")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.vendorEmail)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.vendorHQTable.vendorLocationID)
-        </dt>
+        @*       <dt>
+                @Html.DisplayNameFor(model => model.vendorHQTable.vendorLocationID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.vendorHQTable.vendorLocationID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.vendorHQTable.vendorLocationID)
+            </dd> *@
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { vendorLocationID = Model.vendorLocationID, vendorNumber = Model.vendorNumber }) |
+    @* @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) | *@
     @Html.ActionLink("Back to List", "Index")
 </p>

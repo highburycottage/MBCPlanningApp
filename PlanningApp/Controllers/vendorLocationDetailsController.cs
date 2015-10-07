@@ -22,13 +22,27 @@ namespace PlanningApp.Controllers
         }
 
         // GET: vendorLocationDetails/Details/5
-        public ActionResult Details(string id)
+        //public ActionResult Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    vendorLocationDetail vendorLocationDetail = db.vendorLocationDetails.Find(id);
+        //    if (vendorLocationDetail == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(vendorLocationDetail);
+        //}
+
+        public ActionResult Details(string vendorLocationID, string vendorNumber)
         {
-            if (id == null)
+            if (vendorLocationID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            vendorLocationDetail vendorLocationDetail = db.vendorLocationDetails.Find(id);
+            vendorLocationDetail vendorLocationDetail = db.vendorLocationDetails.Find(vendorLocationID, vendorNumber);
             if (vendorLocationDetail == null)
             {
                 return HttpNotFound();
@@ -62,13 +76,27 @@ namespace PlanningApp.Controllers
         }
 
         // GET: vendorLocationDetails/Edit/5
-        public ActionResult Edit(string id)
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    vendorLocationDetail vendorLocationDetail = db.vendorLocationDetails.Find(id);
+        //    if (vendorLocationDetail == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.vendorNumber = new SelectList(db.vendorHQTables, "vendorID", "vendorLocationID", vendorLocationDetail.vendorNumber);
+        //    return View(vendorLocationDetail);
+        //}
+        public ActionResult Edit(string vendorLocationID, string vendorNumber)
         {
-            if (id == null)
+            if (vendorLocationID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            vendorLocationDetail vendorLocationDetail = db.vendorLocationDetails.Find(id);
+            vendorLocationDetail vendorLocationDetail = db.vendorLocationDetails.Find(vendorLocationID, vendorNumber);
             if (vendorLocationDetail == null)
             {
                 return HttpNotFound();
@@ -76,7 +104,6 @@ namespace PlanningApp.Controllers
             ViewBag.vendorNumber = new SelectList(db.vendorHQTables, "vendorID", "vendorLocationID", vendorLocationDetail.vendorNumber);
             return View(vendorLocationDetail);
         }
-
         // POST: vendorLocationDetails/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

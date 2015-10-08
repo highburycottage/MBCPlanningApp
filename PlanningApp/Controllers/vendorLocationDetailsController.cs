@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PlanningApp.Models;
+using PagedList;
 
 namespace PlanningApp.Controllers
 {
@@ -20,9 +21,21 @@ namespace PlanningApp.Controllers
         //    var vendorLocationDetails = db.vendorLocationDetails.Include(v => v.vendorHQTable);
         //    return View(vendorLocationDetails.ToList());
         //}
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString !=null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.currentFilter = searchString;
 
             var location = from l in db.vendorLocationDetails
                            select l;
@@ -43,7 +56,10 @@ namespace PlanningApp.Controllers
             }
             //var vendorLocationDetails = db.vendorLocationDetails.Include(v => v.vendorHQTable);
             //return View(vendorLocationDetails.ToList());
-            return View(location.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            //return View(location.ToList());
+            return View(location.ToPagedList(pageNumber, pageSize));
         }
         // GET: vendorLocationDetails/Details/5
         //public ActionResult Details(string id)

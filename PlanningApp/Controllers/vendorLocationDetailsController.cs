@@ -15,12 +15,36 @@ namespace PlanningApp.Controllers
         private MBCPlanningEntities db = new MBCPlanningEntities();
 
         // GET: vendorLocationDetails
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var vendorLocationDetails = db.vendorLocationDetails.Include(v => v.vendorHQTable);
+        //    return View(vendorLocationDetails.ToList());
+        //}
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            var vendorLocationDetails = db.vendorLocationDetails.Include(v => v.vendorHQTable);
-            return View(vendorLocationDetails.ToList());
-        }
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
+            var location = from l in db.vendorLocationDetails
+                           select l;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                location = location.Where(l => l.vendorName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    location = location.OrderByDescending(l => l.vendorName);
+                    break;
+                default:
+                    location = location.OrderBy(l => l.vendorName);
+                    break;
+                
+            }
+            //var vendorLocationDetails = db.vendorLocationDetails.Include(v => v.vendorHQTable);
+            //return View(vendorLocationDetails.ToList());
+            return View(location.ToList());
+        }
         // GET: vendorLocationDetails/Details/5
         //public ActionResult Details(string id)
         //{

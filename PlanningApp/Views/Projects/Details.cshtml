@@ -1,0 +1,82 @@
+﻿@model PlanningApp.Models.project
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>project</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.siteName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.siteName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.siteAddress1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.siteAddress1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.siteAddress2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.siteAddress2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.siteAddress3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.siteAddress3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sitePostCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sitePostCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryRestrictions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryRestrictions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.drawingValid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.drawingValid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SSMA_TimeStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SSMA_TimeStamp)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.projectID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

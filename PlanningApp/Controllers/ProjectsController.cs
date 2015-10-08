@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PlanningApp.Models;
+using PagedList;
+
 
 namespace PlanningApp.Controllers
 {
@@ -20,9 +22,22 @@ namespace PlanningApp.Controllers
         //    return View(db.projects.ToList());
         //}
 
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "project_nu" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var projects = from p in db.projects
                            select p;
             if (!String.IsNullOrEmpty(searchString))
@@ -34,8 +49,13 @@ namespace PlanningApp.Controllers
                 case "project_nu":
                     projects = projects.OrderByDescending(p => p.projectID);
                     break;
+                default:
+                    projects = projects.OrderBy(p => p.projectID);
+                    break;
             }
-            return View(projects.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(projects.ToPagedList(pageNumber, pageSize));
         }
         
 

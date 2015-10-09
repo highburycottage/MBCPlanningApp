@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create a New MBC Project</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,11 +12,11 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>project</h4>
+        <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.siteName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Site Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.siteName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.siteName, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.siteAddress1, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Address", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.siteAddress1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.siteAddress1, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.siteAddress2, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Address cont", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.siteAddress2, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.siteAddress2, "", new { @class = "text-danger" })
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.siteAddress3, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Address", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.siteAddress3, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.siteAddress3, "", new { @class = "text-danger" })
@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.sitePostCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Post Code", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.sitePostCode, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sitePostCode, "", new { @class = "text-danger" })
@@ -56,20 +56,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.deliveryRestrictions, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Delivery Restrictions", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.deliveryRestrictions, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.deliveryRestrictions, new { @class = "form-control", rows="5"})        
                 @Html.ValidationMessageFor(model => model.deliveryRestrictions, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.drawingValid, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.drawingValid)
-                    @Html.ValidationMessageFor(model => model.drawingValid, "", new { @class = "text-danger" })
-                </div>
             </div>
         </div>
 

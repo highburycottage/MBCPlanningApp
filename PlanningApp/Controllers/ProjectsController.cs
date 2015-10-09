@@ -10,6 +10,7 @@ using PlanningApp.Models;
 using PagedList;
 
 
+
 namespace PlanningApp.Controllers
 {
     public class ProjectsController : Controller
@@ -85,7 +86,7 @@ namespace PlanningApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,drawingValid,SSMA_TimeStamp")] project project)
+        public ActionResult Create([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,SSMA_TimeStamp")] project project)
         {
             if (ModelState.IsValid)
             {

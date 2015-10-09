@@ -139,6 +139,7 @@
     <Compile Include="App_Start\Bundles\Foundation.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\constructionStaffsController.cs" />
     <Compile Include="Controllers\DrawingRegisterController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -288,6 +289,11 @@
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Shared\_ProjectCreatePartial.cshtml" />
+    <Content Include="Views\constructionStaffs\Create.cshtml" />
+    <Content Include="Views\constructionStaffs\Delete.cshtml" />
+    <Content Include="Views\constructionStaffs\Details.cshtml" />
+    <Content Include="Views\constructionStaffs\Edit.cshtml" />
+    <Content Include="Views\constructionStaffs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

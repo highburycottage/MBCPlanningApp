@@ -15,11 +15,12 @@
         <EntityTypeShape EntityType="MBCPlanningModel.sysdiagram" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MBCPlanningModel.vendorHQTable" Width="1.5" PointX="5.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MBCPlanningModel.vendorLocationDetail" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
-        <AssociationConnector Association="MBCPlanningModel.projectRequisitions_constructionStaffprojectRequisitions" ManuallyRouted="false" />
         <AssociationConnector Association="MBCPlanningModel.requisition_itemContentsrequisition" ManuallyRouted="false" />
         <AssociationConnector Association="MBCPlanningModel.projectRequisitions_projectprojectRequisitions" ManuallyRouted="false" />
         <AssociationConnector Association="MBCPlanningModel.projectRequisitions_requisitionprojectRequisitions" ManuallyRouted="false" />
         <AssociationConnector Association="MBCPlanningModel.vendorLocationDetails_vendorHQTablevendorLocationDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="MBCPlanningModel.FK__project__staffID__2D27B809" />
+        <AssociationConnector Association="MBCPlanningModel.FK__project__staffID__2D27B809" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

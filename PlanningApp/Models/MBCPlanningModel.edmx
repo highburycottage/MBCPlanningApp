@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MBCPlanningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MBCPlanningModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="constructionStaff">
           <Key>
             <PropertyRef Name="staffID" />
@@ -64,8 +64,8 @@
           <Property Name="siteAddress3" Type="nvarchar" MaxLength="255" />
           <Property Name="sitePostCode" Type="nvarchar" MaxLength="255" />
           <Property Name="deliveryRestrictions" Type="nvarchar(max)" />
-          <Property Name="drawingValid" Type="bit" />
           <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="staffID" Type="int" />
         </EntityType>
         <EntityType Name="projectRequisitions">
           <Key>
@@ -78,7 +78,6 @@
           <Property Name="itemCodeID" Type="nvarchar" MaxLength="255" />
           <Property Name="dateUpdated" Type="datetime2" Precision="0" />
           <Property Name="deliveryRestrictions" Type="bit" />
-          <Property Name="staffID" Type="int" />
           <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="requisition">
@@ -136,14 +135,14 @@
           <Property Name="vendorContact" Type="nvarchar" MaxLength="255" />
           <Property Name="vendorEmail" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="projectRequisitions$constructionStaffprojectRequisitions">
+        <Association Name="FK__project__staffID__2D27B809">
           <End Role="constructionStaff" Type="Self.constructionStaff" Multiplicity="0..1" />
-          <End Role="projectRequisitions" Type="Self.projectRequisitions" Multiplicity="*" />
+          <End Role="project" Type="Self.project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="constructionStaff">
               <PropertyRef Name="staffID" />
             </Principal>
-            <Dependent Role="projectRequisitions">
+            <Dependent Role="project">
               <PropertyRef Name="staffID" />
             </Dependent>
           </ReferentialConstraint>
@@ -207,9 +206,9 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vendorHQTable" EntityType="Self.vendorHQTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vendorLocationDetails" EntityType="Self.vendorLocationDetails" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="projectRequisitions$constructionStaffprojectRequisitions" Association="Self.projectRequisitions$constructionStaffprojectRequisitions">
+          <AssociationSet Name="FK__project__staffID__2D27B809" Association="Self.FK__project__staffID__2D27B809">
             <End Role="constructionStaff" EntitySet="constructionStaff" />
-            <End Role="projectRequisitions" EntitySet="projectRequisitions" />
+            <End Role="project" EntitySet="project" />
           </AssociationSet>
           <AssociationSet Name="projectRequisitions$projectprojectRequisitions" Association="Self.projectRequisitions$projectprojectRequisitions">
             <End Role="project" EntitySet="project" />
@@ -228,8 +227,7 @@
             <End Role="vendorLocationDetails" EntitySet="vendorLocationDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MBCPlanningModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -240,7 +238,7 @@
           <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="emailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="projectRequisitions" Relationship="Self.projectRequisitions_constructionStaffprojectRequisitions" FromRole="constructionStaff" ToRole="projectRequisitions" />
+          <NavigationProperty Name="projects" Relationship="MBCPlanningModel.FK__project__staffID__2D27B809" FromRole="constructionStaff" ToRole="project" />
         </EntityType>
         <EntityType Name="drawingRegister">
           <Key>
@@ -294,9 +292,10 @@
           <Property Name="siteAddress3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sitePostCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="deliveryRestrictions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="drawingValid" Type="Boolean" />
           <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="projectRequisitions" Relationship="Self.projectRequisitions_projectprojectRequisitions" FromRole="project" ToRole="projectRequisitions" />
+          <Property Name="staffID" Type="Int32" />
+          <NavigationProperty Name="constructionStaff" Relationship="MBCPlanningModel.FK__project__staffID__2D27B809" FromRole="project" ToRole="constructionStaff" />
         </EntityType>
         <EntityType Name="projectRequisition">
           <Key>
@@ -309,9 +308,7 @@
           <Property Name="itemCodeID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="dateUpdated" Type="DateTime" Precision="0" />
           <Property Name="deliveryRestrictions" Type="Boolean" />
-          <Property Name="staffID" Type="Int32" />
           <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="constructionStaff" Relationship="Self.projectRequisitions_constructionStaffprojectRequisitions" FromRole="projectRequisitions" ToRole="constructionStaff" />
           <NavigationProperty Name="project" Relationship="Self.projectRequisitions_projectprojectRequisitions" FromRole="projectRequisitions" ToRole="project" />
           <NavigationProperty Name="requisition" Relationship="Self.projectRequisitions_requisitionprojectRequisitions" FromRole="projectRequisitions" ToRole="requisition" />
         </EntityType>
@@ -374,18 +371,6 @@
           <Property Name="vendorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="vendorHQTable" Relationship="Self.vendorLocationDetails_vendorHQTablevendorLocationDetails" FromRole="vendorLocationDetails" ToRole="vendorHQTable" />
         </EntityType>
-        <Association Name="projectRequisitions_constructionStaffprojectRequisitions">
-          <End Role="constructionStaff" Type="Self.constructionStaff" Multiplicity="0..1" />
-          <End Role="projectRequisitions" Type="Self.projectRequisition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="constructionStaff">
-              <PropertyRef Name="staffID" />
-            </Principal>
-            <Dependent Role="projectRequisitions">
-              <PropertyRef Name="staffID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="requisition_itemContentsrequisition">
           <End Role="itemContents" Type="Self.itemContent" Multiplicity="0..1" />
           <End Role="requisition" Type="Self.requisition" Multiplicity="*" />
@@ -445,10 +430,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="vendorHQTables" EntityType="Self.vendorHQTable" />
           <EntitySet Name="vendorLocationDetails" EntityType="Self.vendorLocationDetail" />
-          <AssociationSet Name="projectRequisitions_constructionStaffprojectRequisitions" Association="Self.projectRequisitions_constructionStaffprojectRequisitions">
-            <End Role="constructionStaff" EntitySet="constructionStaffs" />
-            <End Role="projectRequisitions" EntitySet="projectRequisitions" />
-          </AssociationSet>
           <AssociationSet Name="requisition_itemContentsrequisition" Association="Self.requisition_itemContentsrequisition">
             <End Role="itemContents" EntitySet="itemContents" />
             <End Role="requisition" EntitySet="requisitions" />
@@ -465,7 +446,23 @@
             <End Role="vendorHQTable" EntitySet="vendorHQTables" />
             <End Role="vendorLocationDetails" EntitySet="vendorLocationDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK__project__staffID__2D27B809" Association="MBCPlanningModel.FK__project__staffID__2D27B809">
+            <End Role="constructionStaff" EntitySet="constructionStaffs" />
+            <End Role="project" EntitySet="projects" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__project__staffID__2D27B809">
+          <End Type="MBCPlanningModel.constructionStaff" Role="constructionStaff" Multiplicity="0..1" />
+          <End Type="MBCPlanningModel.project" Role="project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="constructionStaff">
+              <PropertyRef Name="staffID" />
+            </Principal>
+            <Dependent Role="project">
+              <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -527,6 +524,7 @@
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="MBCPlanningModel.project">
               <MappingFragment StoreEntitySet="project">
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
                 <ScalarProperty Name="projectID" ColumnName="projectID" />
                 <ScalarProperty Name="siteName" ColumnName="siteName" />
                 <ScalarProperty Name="siteAddress1" ColumnName="siteAddress1" />
@@ -534,7 +532,6 @@
                 <ScalarProperty Name="siteAddress3" ColumnName="siteAddress3" />
                 <ScalarProperty Name="sitePostCode" ColumnName="sitePostCode" />
                 <ScalarProperty Name="deliveryRestrictions" ColumnName="deliveryRestrictions" />
-                <ScalarProperty Name="drawingValid" ColumnName="drawingValid" />
                 <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -548,7 +545,6 @@
                 <ScalarProperty Name="itemCodeID" ColumnName="itemCodeID" />
                 <ScalarProperty Name="dateUpdated" ColumnName="dateUpdated" />
                 <ScalarProperty Name="deliveryRestrictions" ColumnName="deliveryRestrictions" />
-                <ScalarProperty Name="staffID" ColumnName="staffID" />
                 <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
               </MappingFragment>
             </EntityTypeMapping>

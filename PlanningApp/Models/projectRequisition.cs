@@ -20,10 +20,8 @@ namespace PlanningApp.Models
         public string itemCodeID { get; set; }
         public Nullable<System.DateTime> dateUpdated { get; set; }
         public Nullable<bool> deliveryRestrictions { get; set; }
-        public Nullable<int> staffID { get; set; }
         public byte[] SSMA_TimeStamp { get; set; }
     
-        public virtual constructionStaff constructionStaff { get; set; }
         public virtual project project { get; set; }
         public virtual requisition requisition { get; set; }
     }

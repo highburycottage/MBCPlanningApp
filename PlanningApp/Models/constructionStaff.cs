@@ -17,7 +17,7 @@ namespace PlanningApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public constructionStaff()
         {
-            this.projectRequisitions = new HashSet<projectRequisition>();
+            this.projects = new HashSet<project>();
         }
     
         public int staffID { get; set; }
@@ -25,6 +25,6 @@ namespace PlanningApp.Models
         public string emailAddress { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<projectRequisition> projectRequisitions { get; set; }
+        public virtual ICollection<project> projects { get; set; }
     }
 }

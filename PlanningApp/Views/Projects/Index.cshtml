@@ -40,6 +40,9 @@
         <th>
             Delivery Restrictions
         </th>
+        <th>
+            Project Staff
+        </th>
         @* <th>
                 @Html.DisplayNameFor(model => model.drawingValid)
             </th>
@@ -72,6 +75,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.deliveryRestrictions)
+        </td>
+        <td>
+            @Html.TextAreaFor(modelItem => item.staffID)
         </td>
         @* <td>
                 @Html.DisplayFor(modelItem => item.drawingValid)

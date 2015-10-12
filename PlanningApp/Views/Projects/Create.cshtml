@@ -66,7 +66,8 @@
         <div class="form-group">
             @Html.Label("Construction Team", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("staffID", null, htmlAttributes: new { @class = "form-control" })
+                @*@@Html.DropDownList("staffID", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ListBox("staffID", (MultiSelectList)ViewBag.staffID, htmlAttributes: new { @class = "form-control chzn-select"})
                 @Html.ValidationMessageFor(model => model.staffID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -83,6 +84,16 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section Scripts 
+{
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.chzn-select').chosen();
+
+        });
+</script>
+    
+<script src="~/Scripts/chosen.jquery.js"></script>
+<link href="~/Content/chosen/chosen.css" rel="stylesheet" />
 }

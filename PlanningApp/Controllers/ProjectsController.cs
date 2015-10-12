@@ -172,5 +172,18 @@ namespace PlanningApp.Controllers
                              select sq;
             ViewBag.staffID = new SelectList(staffQuery, "staffID", "userName", selectedStaff);
         }
+
+        private MultiSelectList GetStaff(string[] selectedStaff)
+        {
+            var staffQuery = from sq in db.constructionStaffs
+                             orderby sq.userName
+                             select sq;
+            return new MultiSelectList(staffQuery, "staffID", "userName", selectedStaff);
+        }
+        public ActionResult MultiSelectStaff()
+        {
+            ViewBag.staffList = GetStaff(null);
+            return View();
+        }
     }
 }

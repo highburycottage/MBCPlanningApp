@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -78,6 +79,7 @@ namespace PlanningApp.Controllers
         // GET: projects/Create
         public ActionResult Create()
         {
+            PopulateConstructionStaffDropDownList();
             return View();
         }
 
@@ -86,7 +88,7 @@ namespace PlanningApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,SSMA_TimeStamp")] project project)
+        public ActionResult Create([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,SSMA_TimeStamp, staffID")] project project)
         {
             if (ModelState.IsValid)
             {
@@ -118,7 +120,7 @@ namespace PlanningApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,drawingValid,SSMA_TimeStamp")] project project)
+        public ActionResult Edit([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,drawingValid,SSMA_TimeStamp, staffID")] project project)
         {
             if (ModelState.IsValid)
             {
@@ -162,6 +164,13 @@ namespace PlanningApp.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        private void PopulateConstructionStaffDropDownList(object selectedStaff = null)
+        {
+            var staffQuery = from sq in db.constructionStaffs
+                             orderby sq.userName
+                             select sq;
+            ViewBag.staffID = new SelectList(staffQuery, "staffID", "userName", selectedStaff);
         }
     }
 }

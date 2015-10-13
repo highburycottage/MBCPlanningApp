@@ -90,13 +90,21 @@ namespace PlanningApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,SSMA_TimeStamp, staffID")] project project)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.projects.Add(project);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.projects.Add(project);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your Administrator");
+            }
+            PopulateConstructionStaffDropDownList(project.staffID);
             return View(project);
         }
 
@@ -112,6 +120,7 @@ namespace PlanningApp.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateConstructionStaffDropDownList(project.staffID);
             return View(project);
         }
 
@@ -122,12 +131,20 @@ namespace PlanningApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "projectID,siteName,siteAddress1,siteAddress2,siteAddress3,sitePostCode,deliveryRestrictions,drawingValid,SSMA_TimeStamp, staffID")] project project)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(project).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(project).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch(RetryLimitExceededException)
+            {
+                ModelState.AddModelError("", "Unable to save changes.  Try again, if the problem persists, contact your administrator");
+            }
+            PopulateConstructionStaffDropDownList(project.staffID);
             return View(project);
         }
 

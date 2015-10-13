@@ -4,14 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Project - Details</h2>
 
 <div>
-    <h4>project</h4>
+    <h4>BC @Html.DisplayFor(model => model.projectID)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.siteName)
+           Site Name
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.siteAddress1)
+            Site Address
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.siteAddress2)
+            Address cont
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.siteAddress3)
+           Address cont
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.sitePostCode)
+            Post Code
         </dt>
 
         <dd>
@@ -51,28 +51,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryRestrictions)
+            Delivery Restrictions
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.deliveryRestrictions)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.drawingValid)
+            Construction Staff
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.drawingValid)
+            @Html.DisplayFor(model => model.staffID)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SSMA_TimeStamp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SSMA_TimeStamp)
-        </dd>
 
     </dl>
 </div>

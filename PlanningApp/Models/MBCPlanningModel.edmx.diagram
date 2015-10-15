@@ -19,8 +19,7 @@
         <AssociationConnector Association="MBCPlanningModel.projectRequisitions_projectprojectRequisitions" ManuallyRouted="false" />
         <AssociationConnector Association="MBCPlanningModel.projectRequisitions_requisitionprojectRequisitions" ManuallyRouted="false" />
         <AssociationConnector Association="MBCPlanningModel.vendorLocationDetails_vendorHQTablevendorLocationDetails" ManuallyRouted="false" />
-        <AssociationConnector Association="MBCPlanningModel.FK__project__staffID__2D27B809" />
-        <AssociationConnector Association="MBCPlanningModel.FK__project__staffID__2D27B809" />
+        <AssociationConnector Association="MBCPlanningModel.projectStaff" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

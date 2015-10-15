@@ -18,6 +18,7 @@ namespace PlanningApp.Models
         public project()
         {
             this.projectRequisitions = new HashSet<projectRequisition>();
+            this.constructionStaffs = new HashSet<constructionStaff>();
         }
     
         public int projectID { get; set; }
@@ -28,10 +29,10 @@ namespace PlanningApp.Models
         public string sitePostCode { get; set; }
         public string deliveryRestrictions { get; set; }
         public byte[] SSMA_TimeStamp { get; set; }
-        public Nullable<int> staffID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<projectRequisition> projectRequisitions { get; set; }
-        public virtual constructionStaff constructionStaff { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<constructionStaff> constructionStaffs { get; set; }
     }
 }

@@ -65,7 +65,6 @@
           <Property Name="sitePostCode" Type="nvarchar" MaxLength="255" />
           <Property Name="deliveryRestrictions" Type="nvarchar(max)" />
           <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="staffID" Type="int" />
         </EntityType>
         <EntityType Name="projectRequisitions">
           <Key>
@@ -79,6 +78,14 @@
           <Property Name="dateUpdated" Type="datetime2" Precision="0" />
           <Property Name="deliveryRestrictions" Type="bit" />
           <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="projectStaff">
+          <Key>
+            <PropertyRef Name="projectID" />
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="projectID" Type="int" Nullable="false" />
+          <Property Name="staffID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="requisition">
           <Key>
@@ -135,15 +142,27 @@
           <Property Name="vendorContact" Type="nvarchar" MaxLength="255" />
           <Property Name="vendorEmail" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <Association Name="FK__project__staffID__2D27B809">
-          <End Role="constructionStaff" Type="Self.constructionStaff" Multiplicity="0..1" />
-          <End Role="project" Type="Self.project" Multiplicity="*" />
+        <Association Name="FK_projectStaff_constructionStaff">
+          <End Role="constructionStaff" Type="Self.constructionStaff" Multiplicity="1" />
+          <End Role="projectStaff" Type="Self.projectStaff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="constructionStaff">
               <PropertyRef Name="staffID" />
             </Principal>
-            <Dependent Role="project">
+            <Dependent Role="projectStaff">
               <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_projectStaff_project">
+          <End Role="project" Type="Self.project" Multiplicity="1" />
+          <End Role="projectStaff" Type="Self.projectStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="project">
+              <PropertyRef Name="projectID" />
+            </Principal>
+            <Dependent Role="projectStaff">
+              <PropertyRef Name="projectID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -202,13 +221,18 @@
           <EntitySet Name="plantHireOrder" EntityType="Self.plantHireOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="project" EntityType="Self.project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="projectRequisitions" EntityType="Self.projectRequisitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="projectStaff" EntityType="Self.projectStaff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="requisition" EntityType="Self.requisition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vendorHQTable" EntityType="Self.vendorHQTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vendorLocationDetails" EntityType="Self.vendorLocationDetails" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__project__staffID__2D27B809" Association="Self.FK__project__staffID__2D27B809">
+          <AssociationSet Name="FK_projectStaff_constructionStaff" Association="Self.FK_projectStaff_constructionStaff">
             <End Role="constructionStaff" EntitySet="constructionStaff" />
+            <End Role="projectStaff" EntitySet="projectStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_projectStaff_project" Association="Self.FK_projectStaff_project">
             <End Role="project" EntitySet="project" />
+            <End Role="projectStaff" EntitySet="projectStaff" />
           </AssociationSet>
           <AssociationSet Name="projectRequisitions$projectprojectRequisitions" Association="Self.projectRequisitions$projectprojectRequisitions">
             <End Role="project" EntitySet="project" />
@@ -238,7 +262,7 @@
           <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="emailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="projects" Relationship="MBCPlanningModel.FK__project__staffID__2D27B809" FromRole="constructionStaff" ToRole="project" />
+          <NavigationProperty Name="projects1" Relationship="MBCPlanningModel.projectStaff" FromRole="constructionStaff" ToRole="project" />
         </EntityType>
         <EntityType Name="drawingRegister">
           <Key>
@@ -294,8 +318,7 @@
           <Property Name="deliveryRestrictions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="projectRequisitions" Relationship="Self.projectRequisitions_projectprojectRequisitions" FromRole="project" ToRole="projectRequisitions" />
-          <Property Name="staffID" Type="Int32" />
-          <NavigationProperty Name="constructionStaff" Relationship="MBCPlanningModel.FK__project__staffID__2D27B809" FromRole="project" ToRole="constructionStaff" />
+          <NavigationProperty Name="constructionStaffs" Relationship="MBCPlanningModel.projectStaff" FromRole="project" ToRole="constructionStaff" />
         </EntityType>
         <EntityType Name="projectRequisition">
           <Key>
@@ -446,22 +469,14 @@
             <End Role="vendorHQTable" EntitySet="vendorHQTables" />
             <End Role="vendorLocationDetails" EntitySet="vendorLocationDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__project__staffID__2D27B809" Association="MBCPlanningModel.FK__project__staffID__2D27B809">
+          <AssociationSet Name="projectStaff" Association="MBCPlanningModel.projectStaff">
             <End Role="constructionStaff" EntitySet="constructionStaffs" />
             <End Role="project" EntitySet="projects" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="FK__project__staffID__2D27B809">
-          <End Type="MBCPlanningModel.constructionStaff" Role="constructionStaff" Multiplicity="0..1" />
+        <Association Name="projectStaff">
+          <End Type="MBCPlanningModel.constructionStaff" Role="constructionStaff" Multiplicity="*" />
           <End Type="MBCPlanningModel.project" Role="project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="constructionStaff">
-              <PropertyRef Name="staffID" />
-            </Principal>
-            <Dependent Role="project">
-              <PropertyRef Name="staffID" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -524,7 +539,6 @@
           <EntitySetMapping Name="projects">
             <EntityTypeMapping TypeName="MBCPlanningModel.project">
               <MappingFragment StoreEntitySet="project">
-                <ScalarProperty Name="staffID" ColumnName="staffID" />
                 <ScalarProperty Name="projectID" ColumnName="projectID" />
                 <ScalarProperty Name="siteName" ColumnName="siteName" />
                 <ScalarProperty Name="siteAddress1" ColumnName="siteAddress1" />
@@ -607,6 +621,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="projectStaff" TypeName="MBCPlanningModel.projectStaff" StoreEntitySet="projectStaff">
+            <EndProperty Name="project">
+              <ScalarProperty Name="projectID" ColumnName="projectID" />
+            </EndProperty>
+            <EndProperty Name="constructionStaff">
+              <ScalarProperty Name="staffID" ColumnName="staffID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
